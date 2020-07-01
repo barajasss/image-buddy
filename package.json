@@ -1,18 +1,22 @@
 {
-  "name": "image-buddy",
-  "version": "1.0.0",
-  "description": "Search images easily",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "image",
-    "search"
-  ],
-  "author": "Baraja Swargiary",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+	"name": "image-buddy",
+	"version": "1.0.0",
+	"description": "Search images easily",
+	"main": "index.js",
+	"scripts": {
+		"start": "node server.js",
+		"dev": "nodemon server.js"
+	},
+	"keywords": [
+		"image",
+		"search"
+	],
+	"author": "Baraja Swargiary",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"heroku-ssl-redirect": "0.0.4"
+	}
 }

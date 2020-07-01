@@ -1,0 +1,9 @@
+.App {
+	width: 95%;
+	max-width: 450px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-top: none;
+}

@@ -1,0 +1,27 @@
+.searchForm {
+	max-width: 95%;
+	margin-bottom: 20px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.searchForm > input {
+	flex: 2;
+	margin-right: 5px;
+}
+
+.searchForm > button {
+	flex: 1;
+	margin-top: 10px;
+}
+
+@media screen and (min-width: 400px) {
+	.searchForm > button {
+		max-width: 100px;
+		margin-top: 0px;
+	}
+}
