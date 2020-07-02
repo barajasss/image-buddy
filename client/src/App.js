@@ -72,6 +72,13 @@ class App extends React.Component {
 			appRef: this.appRef,
 		})
 	}
+	emptyImageUrls = () => {
+		this.setState({
+			data: {
+				imageUrls: [null],
+			},
+		})
+	}
 	render() {
 		return (
 			<div className='App' ref={this.appRef}>
@@ -90,7 +97,10 @@ class App extends React.Component {
 						<small style={{ fontSize: '0.5em' }}>Source Code</small>
 					</a>
 				</h2>
-				<SearchForm loadImages={this.loadImages} />
+				<SearchForm
+					emptyImageUrls={this.emptyImageUrls}
+					loadImages={this.loadImages}
+				/>
 
 				{this.state.data.imageUrls.length > 0 ? (
 					<ImageContainer images={this.state.data.imageUrls} />
