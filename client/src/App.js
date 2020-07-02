@@ -4,6 +4,7 @@ import './App.css'
 import SearchForm from './components/search-form/search-form.component'
 import ImageContainer from './components/image-container/image-container.component'
 import CustomImage from './components/custom-image/custom-image.component'
+import TopButton from './components/top-button/top-button.component'
 
 class App extends React.Component {
 	constructor() {
@@ -12,12 +13,13 @@ class App extends React.Component {
 			data: {
 				imageUrls: [],
 			},
+			appRef: null,
 			initialLoad: false,
 			page: 1,
 			loading: false,
 		}
 		this.handleScroll = this.handleScroll.bind(this)
-
+		this.appRef = React.createRef()
 		window.addEventListener('scroll', this.handleScroll)
 	}
 
@@ -68,13 +70,29 @@ class App extends React.Component {
 			console.log('iamges', images)
 		} catch (err) {}
 	}
+	componentDidMount() {
+		this.setState({
+			appRef: this.appRef,
+		})
+	}
 	render() {
 		return (
-			<div className='App'>
+			<div className='App' ref={this.appRef}>
 				<h1>
 					Image Buddy{' '}
 					<small style={{ fontSize: '0.5em' }}>By Baraja</small>
 				</h1>
+				<h2 style={{ marginTop: '-20px' }}>
+					<small style={{ fontSize: '0.5em' }}>
+						Credits: pixabay.com |
+					</small>{' '}
+					<a
+						href='https://github.com/barajasss/image-buddy'
+						target='_blank'
+						style={{ color: 'dodgerblue' }}>
+						<small style={{ fontSize: '0.5em' }}>Source Code</small>
+					</a>
+				</h2>
 				<SearchForm loadImages={this.loadImages} />
 
 				{this.state.data.imageUrls.length > 0 ? (
@@ -94,6 +112,11 @@ class App extends React.Component {
 				) : (
 					''
 				)}
+				<TopButton
+					appRef={
+						this.state.appRef ? this.state.appRef.current : null
+					}
+				/>
 			</div>
 		)
 	}
