@@ -2,23 +2,19 @@ const axios = require('axios')
 const express = require('express')
 const router = express.Router()
 
-let images = []
+const limit = 5
+let searchText = ''
 
 router.get('/search', async (req, res) => {
-	const searchText = req.query.q
+	searchText = req.query.q
 
 	try {
-		const url = `https://www.googleapis.com/customsearch/v1?key=${process.env.key}&cx=${process.env.cx}&q=${searchText}&imgSize=medium`
+		const url = `https://pixabay.com/api?key=8538609-fc82d8afefafd8effc855c768&q=${searchText}&page=${1}&per_page=${limit}`
 		const response = await axios(url)
 
-		let imageUrls = response.data.items[0].pagemap.imageobject.map(
-			({ contenturl: imageUrl }) => imageUrl
-		)
+		const imageUrls = response.data.hits.map(el => el.webformatURL)
 
-		// store images in global array and send first five images
-
-		images = imageUrls
-		imageUrls = imageUrls.filter((el, i) => (i < 5 ? true : false))
+		console.log(imageUrls)
 
 		res.status(200).json({
 			totalItems: imageUrls.length,
@@ -32,14 +28,16 @@ router.get('/search', async (req, res) => {
 	}
 })
 
-router.get('/page/:page', (req, res) => {
+router.get('/page/:page', async (req, res) => {
 	const page = req.params.page
-	const limit = 5
-	const start = (page - 1) * limit
-	const end = start + limit
+	const url = `https://pixabay.com/api?key=8538609-fc82d8afefafd8effc855c768&q=${encodeURI(
+		searchText
+	)}&page=${page}&per_page=${limit}`
+
+	const response = await axios(url)
 
 	res.status(200).json({
-		imageUrls: images.slice(start, end),
+		imageUrls: response.data.hits.map(el => el.webformatURL),
 	})
 })
 

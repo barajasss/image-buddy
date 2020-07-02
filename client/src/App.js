@@ -38,6 +38,7 @@ class App extends React.Component {
 		}
 	}
 	loadImages = data => {
+		console.log('loadimages')
 		if (!data.err) {
 			this.setState(state => ({
 				data,

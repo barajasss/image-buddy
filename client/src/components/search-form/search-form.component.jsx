@@ -32,6 +32,7 @@ class SearchForm extends React.Component {
 				searching: false,
 			})
 			this.props.loadImages(data)
+			console.log(data)
 		} catch (err) {
 			console.log(err)
 		}
