@@ -9,7 +9,9 @@ router.get('/search', async (req, res) => {
 	searchText = req.query.q
 
 	try {
-		const url = `https://pixabay.com/api?key=8538609-fc82d8afefafd8effc855c768&q=${searchText}&page=${1}&per_page=${limit}`
+		const url = `https://pixabay.com/api?key=${
+			process.env.key
+		}&q=${encodeURI(searchText)}&page=${1}&per_page=${limit}`
 		const response = await axios(url)
 
 		const imageUrls = response.data.hits.map(el => el.webformatURL)
@@ -30,7 +32,7 @@ router.get('/search', async (req, res) => {
 
 router.get('/page/:page', async (req, res) => {
 	const page = req.params.page
-	const url = `https://pixabay.com/api?key=8538609-fc82d8afefafd8effc855c768&q=${encodeURI(
+	const url = `https://pixabay.com/api?key=${process.env.key}&q=${encodeURI(
 		searchText
 	)}&page=${page}&per_page=${limit}`
 
