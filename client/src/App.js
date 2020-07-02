@@ -32,7 +32,6 @@ class App extends React.Component {
 			this.state.initialLoad &&
 			!this.state.loading
 		) {
-			console.log('handleScroll')
 			this.setState({
 				loading: true,
 			})
@@ -40,7 +39,6 @@ class App extends React.Component {
 		}
 	}
 	loadImages = data => {
-		console.log('loadimages')
 		if (!data.err) {
 			this.setState(state => ({
 				data,
@@ -50,7 +48,6 @@ class App extends React.Component {
 		}
 	}
 	loadNextImages = async () => {
-		console.log('loadnexttimages()')
 		let url = `https://image-buddy-baraja.herokuapp.com/api/page/${this.state.page}`
 		try {
 			const res = await fetch(url)
