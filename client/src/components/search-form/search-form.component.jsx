@@ -19,6 +19,7 @@ class SearchForm extends React.Component {
 	}
 	handleSubmit = async e => {
 		e.preventDefault()
+		this.props.emptyImageUrls()
 		this.setState(state => ({
 			searching: true,
 			searched: true,
